@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <title>{% block title %}{{parent()}} Comics {% endblock %}</title>
+    <h1>Comics List</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Picture</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for comic in comics %}
+            <tr>
+                <td><a href="{{ path('comics_show', { 'id': comic.id }) }}">{{ comic.document.title }}</a></td>
+                <td>{{ comic.document.author }}</td>
+                <td>{{ comic.document.picture }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a class="aaction" href="{{ path('comics_show', { 'id': comic.id }) }}">Show</a>
+                        </li>
+                        <li>
+                            <a class="aaction" href="{{ path('comics_edit', { 'id': comic.id }) }}">Edit</a>
+                        </li>
+                        <li>
+                            <a class="aaction" href="#">Reservation</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a class="aaction" href="{{ path('comics_new') }}">Create a new comic</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Loan</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Userid</th>
+                <td>{{ loan.userId }}</td>
+            </tr>
+            <tr>
+                <th>Borrowdate</th>
+                <td>{% if loan.borrowDate %}{{ loan.borrowDate|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Returndate</th>
+                <td>{% if loan.returnDate %}{{ loan.returnDate|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ loan.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('loans_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('loans_edit', { 'id': loan.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <title>{% block title %}{{parent()}} Loans {% endblock %}</title>
+    <h1>Loans list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Userid</th>
+                <th>Borrowdate</th>
+                <th>Returndate</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for loan in loans %}
+            <tr>
+                <td><a href="{{ path('loans_show', { 'id': loan.id }) }}">{{ loan.userId }}</a></td>
+                <td>{% if loan.borrowDate %}{{ loan.borrowDate|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if loan.returnDate %}{{ loan.returnDate|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ loan.id }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a class="aaction" href="{{ path('loans_show', { 'id': loan.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a class="aaction" href="{{ path('loans_edit', { 'id': loan.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('loans_new') }}">Create a new loan</a>
+        </li>
+    </ul>
+{% endblock %}

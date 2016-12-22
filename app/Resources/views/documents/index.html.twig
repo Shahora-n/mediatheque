@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <title>{% block title %}{{parent()}} Documents {% endblock %}</title>
+    <h1>Documents list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Year</th>
+                <th>Arrivaldate</th>
+                <th>Picture</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for document in documents %}
+            <tr>
+                <td><a href="{{ path('documents_show', { 'id': document.id }) }}">{{ document.title }}</a></td>
+                <td>{{ document.author }}</td>
+                <td>{{ document.year }}</td>
+                <td>{% if document.arrivalDate %}{{ document.arrivalDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ document.picture }}</td>              
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('documents_show', { 'id': document.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('documents_edit', { 'id': document.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('documents_new') }}">Create a new document</a>
+        </li>
+    </ul>
+{% endblock %}

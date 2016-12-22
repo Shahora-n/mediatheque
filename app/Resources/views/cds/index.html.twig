@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <title>{% block title %}{{parent()}} Cds {% endblock %}</title>
+    <h1>Cds List</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Picture</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cd in cds %}
+            <tr>
+                <td><a href="{{ path('cds_show', { 'id': cd.id }) }}">{{ cd.document.title }}</a></td>
+                <td>{{ cd.document.author }}</td>
+                <td>{{ cd.document.picture }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a class="aaction" href="{{ path('cds_show', { 'id': cd.id }) }}">Show</a>
+                        </li>
+                        <li>
+                            <a class="aaction" href="{{ path('cds_edit', { 'id': cd.id }) }}">Edit</a>
+                        </li>
+                        <li>
+                            <a class="aaction" href="#">Reservation</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a class="aaction" href="{{ path('cds_new') }}">Create a new cd</a>
+        </li>
+    </ul>
+{% endblock %}

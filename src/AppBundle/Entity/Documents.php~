@@ -1,0 +1,71 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Documents
+ *
+ * @ORM\Table(name="documents", indexes={@ORM\Index(name="type_id", columns={"documentType_id"})})
+ * @ORM\Entity
+ */
+class Documents
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=250, nullable=false)
+     */
+    private $title;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="author", type="string", length=150, nullable=false)
+     */
+    private $author;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="year", type="integer", nullable=false)
+     */
+    private $year;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="arrival_date", type="datetime", nullable=false)
+     */
+    private $arrivalDate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="picture", type="string", length=255, nullable=false)
+     */
+    private $picture;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \AppBundle\Entity\DocumentType
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\DocumentType")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="documentType_id", referencedColumnName="id")
+     * })
+     */
+    private $documenttype;
+
+
+}
+
